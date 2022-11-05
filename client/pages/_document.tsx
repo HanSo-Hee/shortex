@@ -1,4 +1,4 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import getConfig from "next/config";
 import React from "react";
@@ -23,13 +23,9 @@ class AppDocument extends Document<Props> {
 
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-          />
           <meta
             name="description"
             content={`${publicRuntimeConfig.SITE_NAME} is a free and open source URL shortener with custom domains and stats.`}
@@ -38,12 +34,34 @@ class AppDocument extends Document<Props> {
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,700"
             rel="stylesheet"
           />
-          <link rel="icon" sizes="196x196" href="/images/favicon-196x196.png" />
-          <link rel="icon" sizes="32x32" href="/images/favicon-32x32.png" />
-          <link rel="icon" sizes="16x16" href="/images/favicon-16x16.png" />
-          <link rel="apple-touch-icon" href="/images/favicon-196x196.png" />
-          <link rel="mask-icon" href="/images/icon.svg" color="blue" />
-          <link rel="manifest" href="manifest.webmanifest" />
+          <link
+            rel="icon"
+            sizes="196x196"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/images/favicon-196x196.png`}
+          />
+          <link
+            rel="icon"
+            sizes="32x32"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/images/favicon-32x32.png`}
+          />
+          <link
+            rel="icon"
+            sizes="16x16"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/images/favicon-16x16.png`}
+          />
+          <link
+            rel="apple-touch-icon"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/images/favicon-196x196.png`}
+          />
+          <link
+            rel="mask-icon"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/images/icon.svg`}
+            color="blue"
+          />
+          <link
+            rel="manifest"
+            href={`${publicRuntimeConfig.BASE_PATH}/resources/manifest.webmanifest`}
+          />
           <meta name="theme-color" content="#f3f3f3" />
 
           <meta property="fb:app_id" content="123456789" />
@@ -101,7 +119,7 @@ class AppDocument extends Document<Props> {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
