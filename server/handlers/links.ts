@@ -289,18 +289,37 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
     return res.redirect("/banned");
   }
 
-  // 5. If wants to see link info, then redirect
+  // 5. Append query string when provided
+  if (req.query) {
+    const url = URL.parse(link.target, true);
+    const linkTargetParams = new URLSearchParams(url.search);
+
+    let added = 0;
+    Object.entries(req.query).forEach(([key, value]) => {
+      if (typeof value === "string") {
+        added++;
+        linkTargetParams.append(key, value);
+      }
+    });
+
+    if (added) {
+      url.search = linkTargetParams.toString();
+      link.target = URL.format(url);
+    }
+  }
+
+  // 6. If wants to see link info, then redirect
   const doesRequestInfo = /.*\+$/gi.test(req.params.id);
   if (doesRequestInfo && !link.password) {
     return app.render(req, res, "/url-info", { target: link.target });
   }
 
-  // 6. If link is protected, redirect to password page
+  // 7. If link is protected, redirect to password page
   if (link.password) {
     return res.redirect(`/protected/${link.uuid}`);
   }
 
-  // 7. Create link visit
+  // 8. Create link visit
   if (link.user_id && !isBot) {
     queue.visit.add({
       headers: req.headers,
@@ -310,7 +329,7 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
     });
   }
 
-  // 8. Create Google Analytics visit
+  // 9. Create Google Analytics visit
   if (env.GOOGLE_ANALYTICS_UNIVERSAL && !isBot) {
     ua(env.GOOGLE_ANALYTICS_UNIVERSAL)
       .pageview({
