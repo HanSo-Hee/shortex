@@ -10,6 +10,7 @@ module.exports = {
     REPORT_EMAIL: localEnv && localEnv.REPORT_EMAIL,
     DISALLOW_ANONYMOUS_LINKS: localEnv && localEnv.DISALLOW_ANONYMOUS_LINKS,
     DISALLOW_REGISTRATION: localEnv && localEnv.DISALLOW_REGISTRATION,
-    SENTRY_PUBLIC_DSN: localEnv && localEnv.SENTRY_PUBLIC_DSN,
+    DISALLOW_DOMAIN: localEnv && localEnv.DISALLOW_DOMAIN,
+    SENTRY_PUBLIC_DSN: localEnv && localEnv.SENTRY_PUBLIC_DSN
   }
 };
