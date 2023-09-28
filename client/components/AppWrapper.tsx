@@ -1,3 +1,5 @@
+"use client"
+
 import { Flex } from "rebass/styled-components";
 import React, { useEffect } from "react";
 import styled from "styled-components";
@@ -33,7 +35,7 @@ const AppWrapper = ({ children }: { children: any }) => {
 
   useEffect(() => {
     if (isAuthenticated && !fetched && !isVerifyEmailPage) {
-      getSettings().catch(() => logout());
+      getSettings(null).catch(() => logout());
     }
   }, [isAuthenticated, fetched, isVerifyEmailPage, getSettings, logout]);
 

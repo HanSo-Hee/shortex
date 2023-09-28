@@ -5,13 +5,14 @@ import { ifProp } from "styled-tools";
 import Link from "next/link";
 
 interface Props extends BoxProps {
-  href?: string;
+  href: string;
   title?: string;
   target?: string;
   rel?: string;
   forButton?: boolean;
   isNextLink?: boolean;
 }
+
 const StyledBox = styled(Box)<Props>`
   cursor: pointer;
   color: #2196f3;
@@ -33,7 +34,7 @@ export const ALink: FC<Props> = (props) => {
   if (props.isNextLink) {
     const { href, target, title, rel, ...rest } = props;
     return (
-      <Link href={href} target={target} title={title} rel={rel} passHref>
+      <Link href={href} target={target} title={title} rel={rel} passHref style={{ all: 'unset' }}>
         <StyledBox as="a" {...rest} />
       </Link>
     );
